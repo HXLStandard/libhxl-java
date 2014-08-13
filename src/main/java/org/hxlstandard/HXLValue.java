@@ -57,7 +57,7 @@ public class HXLValue {
      * @param source_row_number The row number in the original source,
      * zero-based, or -1 if unspecified.
      */
-    public void init(HXLColumn column, String content, int row_number, int source_row_number) {
+    protected void init(HXLColumn column, String content, int row_number, int source_row_number) {
         this.column = column;
         this.content = content;
         this.row_number = row_number;
