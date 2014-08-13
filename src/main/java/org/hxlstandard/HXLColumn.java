@@ -29,7 +29,7 @@ public class HXLColumn {
      */
     public HXLColumn(String tag, String lang, int column_number, int source_column_number) {
         this.tag = tag.intern();
-        this.lang = lang.intern();
+        this.lang = (lang == null ? null : lang.intern());
         this.column_number = column_number;
         this.source_column_number = source_column_number;
     }
