@@ -17,7 +17,6 @@ public class HXLValueTest {
 
     @Test
     public void testNothing() {
-        Assert.assertTrue(true);
     }
 
 }

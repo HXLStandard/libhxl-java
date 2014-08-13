@@ -8,11 +8,25 @@ Started by David Megginson, August 2014
 Java library for parsing HXL-tagged data.  For more information about HXL, see http://docs.hdx.rwlabs.org/hxl
 
 
+## Setup
+
+To compile and run tests:
+
+```
+ant test
+```
+
+To create a JAR file in dist/lib:
+
+```
+ant dist
+```
+
 ## Usage
 
-_coming soon_
-
+_more coming soon_
 
 ## Requirements
 
-_coming soon_
+* Apache Ant
+* Java 1.7
