@@ -22,11 +22,21 @@ To create a JAR file in dist/lib:
 ant dist
 ```
 
+To generate JavaDoc API documentation in doc/javadoc/:
+
+```
+ant javadoc
+```
+
 ## Usage
 
 _more coming soon_
 
 ## Requirements
 
+### Compile-time requirements
 * Apache Ant
 * Java 1.7
+
+### Runtime requirements
+* OpenCSV (JAR included in lib/)
