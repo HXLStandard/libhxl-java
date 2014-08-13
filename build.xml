@@ -10,7 +10,8 @@
   <property name="main.build.dir" location="${build.dir}/main/java"/>
   <property name="test.src.dir" location="${src.dir}/test/java"/>
   <property name="test.build.dir" location="${build.dir}/test/java"/>
-  <property name="dist.dir"  location="dist"/>
+  <property name="dist.dir" location="dist"/>
+  <property name="javadoc.dir" location="doc/javadoc"/>
 
   <path id="junit.class.path">
     <pathelement location="lib/junit-4.11.jar"/>
@@ -22,6 +23,7 @@
     <tstamp/>
     <mkdir dir="${main.build.dir}"/>
     <mkdir dir="${test.build.dir}"/>
+    <mkdir dir="${javadoc.dir}"/>
   </target>
 
   <target name="compile" depends="init">
@@ -50,8 +52,14 @@
     </junit>
   </target>
 
+  <target name="javadoc" depends="init">
+    <javadoc sourcepath="${main.src.dir}" destdir="${javadoc.dir}">
+    </javadoc>
+  </target>
+
   <target name="clean">
     <delete dir="${build.dir}"/>
     <delete dir="${dist.dir}"/>
+    <delete dir="${javadoc.dir}"/>
   </target>
 </project>
