@@ -7,9 +7,11 @@
   <property name="src.dir" location="src"/>
   <property name="build.dir" location="build"/>
   <property name="main.src.dir" location="${src.dir}/main/java"/>
-  <property name="main.build.dir" location="${build.dir}/main/java"/>
+  <property name="main.resources.dir" location="${src.dir}/main/resources"/>
+  <property name="main.build.dir" location="${build.dir}/main"/>
   <property name="test.src.dir" location="${src.dir}/test/java"/>
-  <property name="test.build.dir" location="${build.dir}/test/java"/>
+  <property name="test.resources.dir" location="${src.dir}/test/resources"/>
+  <property name="test.build.dir" location="${build.dir}/test"/>
   <property name="dist.dir" location="dist"/>
   <property name="javadoc.dir" location="doc/javadoc"/>
 
@@ -34,6 +36,9 @@
     <javac srcdir="${main.src.dir}" destdir="${main.build.dir}" includeantruntime="false">
       <classpath refid="main.class.path"/>
     </javac>
+    <copy todir="${main.build.dir}">
+      <fileset dir="${main.resources.dir}"/>
+    </copy>
   </target>
 
   <target name="dist" depends="compile">
@@ -45,6 +50,9 @@
     <javac srcdir="${test.src.dir}" destdir="${test.build.dir}" includeantruntime="false">
       <classpath refid="junit.class.path"/>
     </javac>
+    <copy todir="${test.build.dir}">
+      <fileset dir="${test.resources.dir}"/>
+    </copy>
   </target>
 
   <target name="test" depends="compile-tests">

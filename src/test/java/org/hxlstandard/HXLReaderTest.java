@@ -1,5 +1,9 @@
 package org.hxlstandard;
 
+import java.io.InputStreamReader;
+import java.io.Reader;
+
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +17,8 @@ public class HXLReaderTest {
     // Instance variables
     //
 
+    private Reader input;
+
     private HXLReader hxl_reader;
 
     //
@@ -21,12 +27,18 @@ public class HXLReaderTest {
 
     @Before
     public void setUp() throws Exception {
-        hxl_reader = new HXLReader(null);
+        input = new InputStreamReader(getClass().getResourceAsStream("/hxl-sample-01.csv"));
+        hxl_reader = new HXLReader(input);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        input.close();
     }
 
     @Test
-    public void testNothing() {
-        Assert.assertTrue(true);
+    public void testResource() {
+        Assert.assertNotNull(getClass().getResourceAsStream("/hxl-sample-01.csv"));
     }
 
 }
