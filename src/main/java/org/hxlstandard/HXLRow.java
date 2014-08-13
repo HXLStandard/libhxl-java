@@ -2,15 +2,16 @@ package org.hxlstandard;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * A row of data in a HXL dataset.
  *
  * <p>The row is equivalent to a single entity or object, and its
- * values together make up a collection of information about that
- * object. There is also sequence information about where this row
- * falls in the logical and source datasets.</p>
+ * values ({@link HXLValue}) together make up a collection of
+ * information about that object. There is also sequence information
+ * about where this row falls in the logical and source datasets.</p>
  *
  * <p>During HXL parsing, the {@link HXLReader} class returns a series
  * of these objects, one for each logical row in the original
@@ -20,11 +21,14 @@ import java.util.List;
  *
  * <pre>
  * HXLRow row = hxl.read();
+ * for (HXLValue value : row) {
+ *   // do something with the value
+ * }
  * </pre>
  *
  * @author David Megginson
  */
-public class HXLRow {
+public class HXLRow implements Iterable<HXLValue> {
 
     private int row_number;
 
@@ -74,6 +78,15 @@ public class HXLRow {
      */
     public List<HXLValue> getValues() {
         return Collections.unmodifiableList(values);
+    }
+
+    /**
+     * Get a read-only iterator over the values.
+     *
+     * @return A read-only value iterator.
+     */
+    public Iterator<HXLValue> iterator() {
+        return getValues().iterator();
     }
 
     /**

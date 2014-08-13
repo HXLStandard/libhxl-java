@@ -61,6 +61,16 @@ public class HXLRowTest {
     }
 
     @Test
+    public void testIterator() {
+        int i = 0;
+        for (HXLValue value : row) {
+            i++;
+        }
+        Assert.assertEquals(VALUES.length, i);
+    }
+
+
+    @Test
     public void testRowNumber() {
         Assert.assertEquals(ROW_NUMBER, row.getRowNumber());
     }
