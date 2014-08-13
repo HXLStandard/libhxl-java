@@ -21,7 +21,7 @@ public class HXLReaderTest {
 
     @Before
     public void setUp() throws Exception {
-        hxl_reader = new HXLReader();
+        hxl_reader = new HXLReader(null);
     }
 
     @Test

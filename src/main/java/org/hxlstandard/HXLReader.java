@@ -1,9 +1,12 @@
 package org.hxlstandard;
 
 import java.io.IOException;
+import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
-import au.com.bytecode.opencsv.CSVParser;
+import au.com.bytecode.opencsv.CSVReader;
 
 /**
  * Class to read HXL data from a CSV file.
@@ -12,16 +15,23 @@ import au.com.bytecode.opencsv.CSVParser;
  */
 public class HXLReader implements Iterable {
 
-    private CSVParser csv_parser;
+    private Reader input;
+
+    private CSVReader csv_reader;
+
+    private ArrayList<HXLColumn> headers;
+
+    private ArrayList<HXLColumn> columns;
 
     private HXLIterator hxl_iterator;
 
     /**
      * Create a new HXL CSV data reader.
      */
-    public HXLReader() {
+    public HXLReader(Reader input) {
         // TODO can add extra params for custom separators, etc.
-        csv_parser = new CSVParser();
+        this.input = input;
+        csv_reader = new CSVReader(input);
     }
 
     /**
@@ -75,6 +85,16 @@ public class HXLReader implements Iterable {
         return hxl_iterator;
     }
 
+    private List<HXLColumn> get_headers() throws IOException {
+        if (headers == null) {
+            find_headers();
+        }
+        return headers;
+    }
+
+    private void find_headers() throws IOException {
+        String fields[] = csv_reader.readNext();
+    }
 
     /**
      * Inner class to implement an iterator for HXLRow objects.
