@@ -55,6 +55,11 @@ public class HXLRowTest {
         }
     }
 
+    @Test(expected=UnsupportedOperationException.class)
+    public void testValuesUnmodifiable() {
+        row.getValues().add(null);
+    }
+
     @Test
     public void testRowNumber() {
         Assert.assertEquals(ROW_NUMBER, row.getRowNumber());
