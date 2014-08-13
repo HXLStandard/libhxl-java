@@ -7,7 +7,8 @@ import org.junit.runner.RunWith;
 @Suite.SuiteClasses({
   HXLValueTest.class,
   HXLRowTest.class,
-  HXLColumnTest.class
+  HXLColumnTest.class,
+  HXLReaderTest.class
 })
 public class TestSuite {
   //nothing
