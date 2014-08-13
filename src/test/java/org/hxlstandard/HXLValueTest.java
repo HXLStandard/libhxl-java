@@ -54,6 +54,7 @@ public class HXLValueTest {
         Assert.assertEquals(8, value.getSourceRowNumber());
     }
 
+    @Test
     public void testColumn() {
         Assert.assertEquals(column, value.getColumn());
     }

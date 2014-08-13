@@ -48,7 +48,7 @@
         <path refid="junit.class.path"/>
       </classpath>
       <formatter type="plain" usefile="false"/>
-      <test name="org.hxlstandard.HXLValueTest"/>
+      <test name="org.hxlstandard.HXLTestSuite"/>
     </junit>
   </target>
 
