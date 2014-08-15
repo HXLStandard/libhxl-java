@@ -54,4 +54,14 @@ public class HXLReaderTest {
         Assert.assertEquals(4, row.getValues().size());
     }
 
+    @Test
+    public void testValues() throws Exception {
+        HXLRow row = hxl_reader.read();
+        HXLValue value = row.getValues().get(1);
+        Assert.assertEquals("#subsector", value.getTag());
+        Assert.assertEquals("Subsector 1", value.getContent());
+        Assert.assertEquals(0, value.getRowNumber());
+        Assert.assertEquals(3, value.getSourceRowNumber());
+    }
+
 }
