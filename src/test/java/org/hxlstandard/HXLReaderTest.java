@@ -43,7 +43,15 @@ public class HXLReaderTest {
 
     @Test
     public void testColumns() throws Exception {
+        Assert.assertNotNull(hxl_reader.getColumns());
         Assert.assertEquals(4, hxl_reader.getColumns().size());
+    }
+
+    @Test
+    public void testRow() throws Exception {
+        HXLRow row = hxl_reader.read();
+        Assert.assertNotNull(row);
+        Assert.assertEquals(4, row.getValues().size());
     }
 
 }

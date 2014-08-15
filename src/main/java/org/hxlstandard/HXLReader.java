@@ -26,6 +26,10 @@ public class HXLReader implements Iterable {
 
     private HXLIterator hxl_iterator;
 
+    private int row_number = -1;
+
+    private int source_row_number = -1;
+
     /**
      * Create a new HXL CSV data reader.
      */
@@ -43,8 +47,26 @@ public class HXLReader implements Iterable {
      * the HXL data from the CSV source.
      */
     public HXLRow read() throws IOException {
-        
-        return null;
+        if (columns == null) {
+            find_columns();
+        }
+
+        String fields[] = read_raw_row();
+        if (fields == null) {
+            row_number = -1;
+            return null;
+        }
+
+        HXLRow row = new HXLRow(++row_number, source_row_number);
+        for (int i = 0; i < fields.length; i++) {
+            HXLColumn column = columnMap.get(i);
+            if (column != null) {
+                HXLValue value = new HXLValue(column, fields[i], row_number, source_row_number);
+                row.getValuesModifiable().add(value);
+            }
+        }
+
+        return row;
     }
 
     /**
@@ -80,7 +102,7 @@ public class HXLReader implements Iterable {
      * @return An iterator object.
      */
     @Override
-    public Iterator<HXLRow> iterator() {
+        public Iterator<HXLRow> iterator() {
         if (hxl_iterator == null) {
             hxl_iterator = new HXLIterator();
         }
@@ -98,15 +120,15 @@ public class HXLReader implements Iterable {
      * Seek forward to the row of HXL headers.
      */
     private void find_columns() throws IOException {
-       String fields[] = csv_reader.readNext();
-       while (fields != null) {
-           if (is_header_row(fields)) {
-               make_columns(fields);
-               return;
-           }
-           fields = csv_reader.readNext();
-       }
-       throw new IOException("HXL header row not found.");
+        String fields[] = read_raw_row();
+        while (fields != null) {
+            if (is_header_row(fields)) {
+                make_columns(fields);
+                return;
+            }
+            fields = read_raw_row();
+        }
+        throw new IOException("HXL header row not found.");
     }
 
     private void make_columns(String fields[]) {
@@ -147,6 +169,17 @@ public class HXLReader implements Iterable {
         return field.startsWith("#");
     }
 
+    private String[] read_raw_row() throws IOException {
+        String fields[] = csv_reader.readNext();
+        if (fields != null) {
+            source_row_number++;
+            return fields;
+        } else {
+            source_row_number = -1;
+            return null;
+        }
+    }
+
 
     /**
      * Inner class to implement an iterator for HXLRow objects.
@@ -160,7 +193,7 @@ public class HXLReader implements Iterable {
         private HXLRow next_row = null;
 
         @Override
-        public boolean hasNext() {
+            public boolean hasNext() {
             if (next_row == null) {
                 next_row = next();
             }
@@ -168,7 +201,7 @@ public class HXLReader implements Iterable {
         }
 
         @Override
-        public HXLRow next() {
+            public HXLRow next() {
             HXLRow row;
             if (next_row != null) {
                 row = next_row;
@@ -184,7 +217,7 @@ public class HXLReader implements Iterable {
         }
 
         @Override
-        public void remove() {
+            public void remove() {
             throw new UnsupportedOperationException();
         }
 
