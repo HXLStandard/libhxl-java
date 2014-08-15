@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 
 import au.com.bytecode.opencsv.CSVReader;
@@ -19,9 +20,9 @@ public class HXLReader implements Iterable {
 
     private CSVReader csv_reader;
 
-    private ArrayList<HXLColumn> headers;
-
     private ArrayList<HXLColumn> columns;
+
+    private HashMap<Integer,HXLColumn> columnMap;
 
     private HXLIterator hxl_iterator;
 
@@ -42,6 +43,7 @@ public class HXLReader implements Iterable {
      * the HXL data from the CSV source.
      */
     public HXLRow read() throws IOException {
+        
         return null;
     }
 
@@ -85,16 +87,66 @@ public class HXLReader implements Iterable {
         return hxl_iterator;
     }
 
-    private List<HXLColumn> get_headers() throws IOException {
-        if (headers == null) {
-            find_headers();
+    public List<HXLColumn> getColumns() throws IOException {
+        if (columns == null) {
+            find_columns();
         }
-        return headers;
+        return columns;
     }
 
-    private void find_headers() throws IOException {
-        String fields[] = csv_reader.readNext();
+    /**
+     * Seek forward to the row of HXL headers.
+     */
+    private void find_columns() throws IOException {
+       String fields[] = csv_reader.readNext();
+       while (fields != null) {
+           if (is_header_row(fields)) {
+               make_columns(fields);
+               return;
+           }
+           fields = csv_reader.readNext();
+       }
+       throw new IOException("HXL header row not found.");
     }
+
+    private void make_columns(String fields[]) {
+        int n = 0;
+        columns = new ArrayList<HXLColumn>();
+        columnMap = new HashMap<Integer,HXLColumn>();
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].length() > 0) {
+                HXLColumn column = new HXLColumn(fields[i], null, n++, i);
+                columns.add(column);
+                columnMap.put(i, column);
+            }
+        }
+    }
+
+    /**
+     * Test if a raw CSV row consists of HXL headers.
+     */
+    private boolean is_header_row(String fields[]) {
+        boolean seen_tag = false;
+        for (String field : fields) {
+            if (field.length() > 0) {
+                if (is_hxl_tag(field)) {
+                    seen_tag = true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return seen_tag;
+    }
+
+    /**
+     * Test if a string is a HXL tag.
+     */
+    private boolean is_hxl_tag(String field) {
+        // TODO proper test
+        return field.startsWith("#");
+    }
+
 
     /**
      * Inner class to implement an iterator for HXLRow objects.

@@ -41,4 +41,9 @@ public class HXLReaderTest {
         Assert.assertNotNull(getClass().getResourceAsStream("/hxl-sample-01.csv"));
     }
 
+    @Test
+    public void testColumns() throws Exception {
+        Assert.assertEquals(4, hxl_reader.getColumns().size());
+    }
+
 }
