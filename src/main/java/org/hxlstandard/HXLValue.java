@@ -29,21 +29,21 @@ public class HXLValue {
 
     private String content;
 
-    private int row_number;
+    private int rowNumber;
 
-    private int source_row_number;
+    private int sourceRowNumber;
 
     /**
      * Create a new value object.
      *
      * @param column The column metadata for this value.
      * @param content A string representation of the value.
-     * @param row_number The logical (HXL) row number, zero-based.
-     * @param source_row_number The row number in the original source,
+     * @param rowNumber The logical (HXL) row number, zero-based.
+     * @param sourceRowNumber The row number in the original source,
      * zero-based, or -1 if unspecified.
      */
-    public HXLValue(HXLColumn column, String content, int row_number, int source_row_number) {
-        init(column, content, row_number, source_row_number);
+    public HXLValue(HXLColumn column, String content, int rowNumber, int sourceRowNumber) {
+        init(column, content, rowNumber, sourceRowNumber);
     }
 
     /**
@@ -53,15 +53,15 @@ public class HXLValue {
      *
      * @param column The column metadata for this value.
      * @param content A string representation of the value.
-     * @param row_number The logical (HXL) row number, zero-based.
-     * @param source_row_number The row number in the original source,
+     * @param rowNumber The logical (HXL) row number, zero-based.
+     * @param sourceRowNumber The row number in the original source,
      * zero-based, or -1 if unspecified.
      */
-    protected void init(HXLColumn column, String content, int row_number, int source_row_number) {
+    protected void init(HXLColumn column, String content, int rowNumber, int sourceRowNumber) {
         this.column = column;
         this.content = content;
-        this.row_number = row_number;
-        this.source_row_number = source_row_number;
+        this.rowNumber = rowNumber;
+        this.sourceRowNumber = sourceRowNumber;
     }
 
     /**
@@ -90,7 +90,7 @@ public class HXLValue {
      * @return The zero-based row number.
      */
     public int getRowNumber() {
-        return row_number;
+        return rowNumber;
     }
 
     /**
@@ -102,7 +102,7 @@ public class HXLValue {
      * unspecified.
      */
     public int getSourceRowNumber() {
-        return source_row_number;
+        return sourceRowNumber;
     }
 
     /**

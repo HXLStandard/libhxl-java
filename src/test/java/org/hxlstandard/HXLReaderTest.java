@@ -19,7 +19,7 @@ public class HXLReaderTest {
 
     private Reader input;
 
-    private HXLReader hxl_reader;
+    private HXLReader hxlReader;
 
     //
     // Tests
@@ -28,7 +28,7 @@ public class HXLReaderTest {
     @Before
     public void setUp() throws Exception {
         input = new InputStreamReader(getClass().getResourceAsStream("/hxl-sample-01.csv"));
-        hxl_reader = new HXLReader(input);
+        hxlReader = new HXLReader(input);
     }
 
     @After
@@ -43,20 +43,20 @@ public class HXLReaderTest {
 
     @Test
     public void testColumns() throws Exception {
-        Assert.assertNotNull(hxl_reader.getColumns());
-        Assert.assertEquals(4, hxl_reader.getColumns().size());
+        Assert.assertNotNull(hxlReader.getColumns());
+        Assert.assertEquals(4, hxlReader.getColumns().size());
     }
 
     @Test
     public void testRow() throws Exception {
-        HXLRow row = hxl_reader.read();
+        HXLRow row = hxlReader.read();
         Assert.assertNotNull(row);
         Assert.assertEquals(4, row.getValues().size());
     }
 
     @Test
     public void testValues() throws Exception {
-        HXLRow row = hxl_reader.read();
+        HXLRow row = hxlReader.read();
         HXLValue value = row.getValues().get(1);
         Assert.assertEquals("#subsector", value.getTag());
         Assert.assertEquals("Subsector 1", value.getContent());
