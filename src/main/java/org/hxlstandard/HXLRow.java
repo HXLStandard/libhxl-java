@@ -30,20 +30,20 @@ import java.util.List;
  */
 public class HXLRow implements Iterable<HXLValue> {
 
-    private int row_number;
+    private int rowNumber;
 
-    private int source_row_number;
+    private int sourceRowNumber;
 
     private ArrayList<HXLValue> values = new ArrayList<HXLValue>();
 
     /**
      * Create a new row of HXL data.
      *
-     * @param row_number The logical (HXL) row number, zero-based.
-     * @param source_row_number The original source row number, zero-based.
+     * @param rowNumber The logical (HXL) row number, zero-based.
+     * @param sourceRowNumber The original source row number, zero-based.
      */
-    public HXLRow(int row_number, int source_row_number) {
-        init(row_number, source_row_number);
+    public HXLRow(int rowNumber, int sourceRowNumber) {
+        init(rowNumber, sourceRowNumber);
     }
 
     /**
@@ -51,13 +51,13 @@ public class HXLRow implements Iterable<HXLValue> {
      *
      * This method is useful for reusing objects.
      *
-     * @param row_number The logical (HXL) row number, zero-based.
-     * @param source_row_number The original source row number, zero-based.
+     * @param rowNumber The logical (HXL) row number, zero-based.
+     * @param sourceRowNumber The original source row number, zero-based.
      */
-    protected void init(int row_number, int source_row_number) {
+    protected void init(int rowNumber, int sourceRowNumber) {
         values.clear();
-        this.row_number = row_number;
-        this.source_row_number = source_row_number;
+        this.rowNumber = rowNumber;
+        this.sourceRowNumber = sourceRowNumber;
     }
 
     /**
@@ -95,7 +95,7 @@ public class HXLRow implements Iterable<HXLValue> {
      * @return The row number, zero-based.
      */
     public int getRowNumber() {
-        return row_number;
+        return rowNumber;
     }
 
     /**
@@ -106,7 +106,7 @@ public class HXLRow implements Iterable<HXLValue> {
      * @return The original row number, zero-based.
      */
     public int getSourceRowNumber() {
-        return source_row_number;
+        return sourceRowNumber;
     }
 
 }

@@ -14,24 +14,24 @@ public class HXLColumn {
 
     private String lang;
 
-    private int column_number;
+    private int columnNumber;
 
-    private int source_column_number;
+    private int sourceColumnNumber;
 
     /**
      * Create a new set of column metadata.
      *
      * @param tag The HXL hashtag (including the "#").
      * @param lang The ISO 639 language code, or null if unspecified.
-     * @param column_number The logical (HXL) column number, zero-based.
-     * @param source_column_number The column number in the source
+     * @param columnNumber The logical (HXL) column number, zero-based.
+     * @param sourceColumnNumber The column number in the source
      * data, zero-based, or -1 if unspecified.
      */
-    public HXLColumn(String tag, String lang, int column_number, int source_column_number) {
+    public HXLColumn(String tag, String lang, int columnNumber, int sourceColumnNumber) {
         this.tag = tag.intern();
         this.lang = (lang == null ? null : lang.intern());
-        this.column_number = column_number;
-        this.source_column_number = source_column_number;
+        this.columnNumber = columnNumber;
+        this.sourceColumnNumber = sourceColumnNumber;
     }
 
     /**
@@ -58,7 +58,7 @@ public class HXLColumn {
      * @return The zero-based column number.
      */
     public int getColumnNumber() {
-        return column_number;
+        return columnNumber;
     }
 
     /**
@@ -68,7 +68,7 @@ public class HXLColumn {
      * unspecified.
      */
     public int getSourceColumnNumber() {
-        return source_column_number;
+        return sourceColumnNumber;
     }
 
 }
