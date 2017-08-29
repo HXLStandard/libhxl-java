@@ -7,7 +7,6 @@
   <property name="src.dir" location="src"/>
   <property name="build.dir" location="build"/>
   <property name="main.src.dir" location="${src.dir}/main/java"/>
-  <property name="main.resources.dir" location="${src.dir}/main/resources"/>
   <property name="main.build.dir" location="${build.dir}/main"/>
   <property name="test.src.dir" location="${src.dir}/test/java"/>
   <property name="test.resources.dir" location="${src.dir}/test/resources"/>
@@ -36,9 +35,6 @@
     <javac srcdir="${main.src.dir}" destdir="${main.build.dir}" includeantruntime="false">
       <classpath refid="main.class.path"/>
     </javac>
-    <copy todir="${main.build.dir}">
-      <fileset dir="${main.resources.dir}"/>
-    </copy>
   </target>
 
   <target name="dist" depends="compile">
